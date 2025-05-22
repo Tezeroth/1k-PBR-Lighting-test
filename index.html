@@ -8,14 +8,18 @@
     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
-    <a-scene shadow="type: pcfsoft" renderer="colorManagement: true; physicallyCorrectLights: true; shadowMapType: pcfsoft;" background="color: #000">
+    <a-scene shadow="type: basic"
+             renderer="colorManagement: true; physicallyCorrectLights: true; shadowMapEnabled: true;"
+             background="color: #000">
 
       <a-assets>
         <img id="skybox1" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/ace%20skybox.jpg?v=1747873890750">
-        <img id="checkerboard" crossorigin="anonymous" src="Assets/checkerboardR.png">
-        <a-asset-item id="archway" src="Models/archwaybake.glb"></a-asset-item>
+
+       
         <img id="albedoTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Albedo_8K.jpg?v=1747873992987" crossorigin="anonymous">
+        
         <img id="normalTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Normal_8K.jpg?v=1747874078663" crossorigin="anonymous">
+        
         <img id="roughTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Roughness_8K.jpg?v=1747874152512" crossorigin="anonymous">
       </a-assets>
 
@@ -25,34 +29,40 @@
         scale="0.7 0.4 1">
       </a-sky>
 
-      <!-- Stationary directional light for soft fill -->
-      <a-entity light="type: directional; intensity: 0.3; castShadow: false;" position="3 5 2" rotation="-45 0 0"></a-entity>
-
-      <!-- Ambient light -->
+      <!-- Ambient light for fill -->
       <a-entity light="type: ambient; intensity: 0.2; color: #aeefff"></a-entity>
 
-      <!-- Orbiting emissive orb with moving point light -->
+      <!-- Static directional light 
+      <a-entity light="type: directional; intensity: 0.3; castShadow: true;"
+                position="3 5 2"
+                rotation="-45 0 0"
+                shadow-camera-near="0.5"
+                shadow-camera-far="50"
+                shadow-map-width="1024"
+                shadow-map-height="1024"
+                shadow-bias="-0.001">
+      </a-entity> -->
+
+      <!-- Orbiting emissive orb with point light casting shadows -->
       <a-entity id="orb-container"
                 position="0 2 0"
                 animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
-        
-        <!-- Emissive orb -->
         <a-sphere position="1 0 0"
                   radius="0.2"
                   color="#aeefff"
                   material="emissive: #aeefff; emissiveIntensity: 1; color: #aeefff; roughness: 0.1; metalness: 0.3;"
                   shadow="cast: true">
-          
-          <!-- Actual light -->
           <a-light type="point"
                    color="#aeefff"
                    intensity="4"
                    distance="10"
                    decay="2"
                    castShadow="true"
-                   shadowCameraNear="0.1"
-                   shadowCameraFar="25"
-                   shadowBias="-0.00005">
+                   shadow-camera-near="0.1"
+                   shadow-camera-far="25"
+                   shadow-map-width="1024"
+                   shadow-map-height="1024"
+                   shadow-bias="-0.001">
           </a-light>
         </a-sphere>
       </a-entity>
@@ -70,7 +80,7 @@
                        roughnessMap: #roughTex;
                        metalness: 0;
                        repeat: 1 1;"
-             shadow="cast: true; receive: false">
+             shadow="cast: true; receive: true">
       </a-box>
 
       <!-- Sphere -->
@@ -81,7 +91,7 @@
                           roughnessMap: #roughTex;
                           metalness: 0;
                           repeat: 1 1;"
-                shadow="cast: true; receive: false">
+                shadow="cast: true; receive: true">
       </a-sphere>
 
       <!-- Cylinder -->
@@ -92,7 +102,7 @@
                             roughnessMap: #roughTex;
                             metalness: 0;
                             repeat: 1 1;"
-                  shadow="cast: true; receive: false">
+                  shadow="cast: true; receive: true">
       </a-cylinder>
 
       <!-- Ground -->
@@ -105,6 +115,8 @@
                          repeat: 4 4;"
                shadow="receive: true">
       </a-plane>
+
+
 
     </a-scene>
   </body>
