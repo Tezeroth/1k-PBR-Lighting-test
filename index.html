@@ -5,59 +5,57 @@
     <title>A-Frame PBR 8k texture test</title>
     <meta name="description" content="A-Frame PBR Example">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <!-- PBR component via aframe-extras or your own shader -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
-    <a-scene>
+    <a-scene shadow="type: pcfsoft" renderer="colorManagement: true; physicallyCorrectLights: true; shadowMapType: pcfsoft;" background="color: #000">
+
       <a-assets>
-        <!-- Skybox -->
         <img id="skybox1" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/ace%20skybox.jpg?v=1747873890750">
-        
-        <!-- Floor texture -->
         <img id="checkerboard" crossorigin="anonymous" src="Assets/checkerboardR.png">
-
-        <!-- Model -->
         <a-asset-item id="archway" src="Models/archwaybake.glb"></a-asset-item>
-
-        <!-- PBR textures -->
         <img id="albedoTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Albedo_8K.jpg?v=1747873992987" crossorigin="anonymous">
         <img id="normalTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Normal_8K.jpg?v=1747874078663" crossorigin="anonymous">
         <img id="roughTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Roughness_8K.jpg?v=1747874152512" crossorigin="anonymous">
       </a-assets>
 
-      <!-- Sky -->
       <a-sky
         src="#skybox1"
         geometry="primitive: sphere; radius: 492.72; segmentsWidth: 12; segmentsHeight: 12"
         scale="0.7 0.4 1">
       </a-sky>
 
-      <!-- Lighting -->
-      <a-entity light="type: directional; intensity: 1" position="1 2 1"></a-entity>
-      <a-entity light="type: ambient; intensity: 1"></a-entity>
-      
-        <!-- Orbiting entity container -->
+      <!-- Stationary directional light for soft fill -->
+      <a-entity light="type: directional; intensity: 0.3; castShadow: false;" position="3 5 2" rotation="-45 0 0"></a-entity>
+
+      <!-- Ambient light -->
+      <a-entity light="type: ambient; intensity: 0.2; color: #aeefff"></a-entity>
+
+      <!-- Orbiting emissive orb with moving point light -->
       <a-entity id="orb-container"
                 position="0 2 0"
                 animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
-
-        <!-- Light orb -->
+        
+        <!-- Emissive orb -->
         <a-sphere position="1 0 0"
                   radius="0.2"
                   color="#aeefff"
-                  material="emissive: #aeefff; emissiveIntensity: 1; color: #aeefff; roughness: 0.1; metalness: 0.3;">
+                  material="emissive: #aeefff; emissiveIntensity: 1; color: #aeefff; roughness: 0.1; metalness: 0.3;"
+                  shadow="cast: true">
           
-          <!-- Attached light -->
+          <!-- Actual light -->
           <a-light type="point"
                    color="#aeefff"
-                   intensity="80.5"
-                   distance="6"
-                   decay="2">
+                   intensity="4"
+                   distance="10"
+                   decay="2"
+                   castShadow="true"
+                   shadowCameraNear="0.1"
+                   shadowCameraFar="25"
+                   shadowBias="-0.00005">
           </a-light>
         </a-sphere>
       </a-entity>
-    
 
       <!-- Camera -->
       <a-entity position="0 1.6 4">
@@ -71,7 +69,8 @@
                        normalMap: #normalTex;
                        roughnessMap: #roughTex;
                        metalness: 0;
-                       repeat: 1 1;">
+                       repeat: 1 1;"
+             shadow="cast: true; receive: false">
       </a-box>
 
       <!-- Sphere -->
@@ -81,7 +80,8 @@
                           normalMap: #normalTex;
                           roughnessMap: #roughTex;
                           metalness: 0;
-                          repeat: 1 1;">
+                          repeat: 1 1;"
+                shadow="cast: true; receive: false">
       </a-sphere>
 
       <!-- Cylinder -->
@@ -91,7 +91,8 @@
                             normalMap: #normalTex;
                             roughnessMap: #roughTex;
                             metalness: 0;
-                            repeat: 1 1;">
+                            repeat: 1 1;"
+                  shadow="cast: true; receive: false">
       </a-cylinder>
 
       <!-- Ground -->
@@ -101,8 +102,10 @@
                          normalMap: #normalTex;
                          roughnessMap: #roughTex;
                          metalness: 0;
-                         repeat: 4 4;">
+                         repeat: 4 4;"
+               shadow="receive: true">
       </a-plane>
+
     </a-scene>
   </body>
 </html>
