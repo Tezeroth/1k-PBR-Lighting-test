@@ -47,7 +47,7 @@
 
   
       <!--light that mimics suns reflections -->
-    <a-entity light="color: #d17321; intensity: 2.04; castShadow: true; groundColor: #d5c039; penumbra: 2" position="10 3 -0.6" data-aframe-default-light="" aframe-injected=""></a-entity>
+    <a-entity id="sun"light="color: #d17321; intensity: 2.04; castShadow: true; groundColor: #d5c039; penumbra: 2" position="10 3 -0.9" data-aframe-default-light="" aframe-injected=""></a-entity>
 
 
 
@@ -69,7 +69,7 @@
           <!--point light seems to help with specular/glossy highlights-->
                 <a-light type="point"
                color="#6a7cc4"
-               intensity="8"
+               intensity="15"
                distance="10"
                decay="2"
                castShadow="true"
@@ -122,7 +122,7 @@
       </a-sphere>
 
       <!-- Cylinder -->
-      <a-cylinder position="2 0.75 -6" radius="0.5" height="1.5"
+      <a-cylinder position="2 0.75 -4.5" radius="0.5" height="1.5"
                   material="shader: standard;
                             src: #albedoTex;
                             normalMap: #normalTex;
