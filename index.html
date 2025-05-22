@@ -23,6 +23,9 @@
           src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/ace%20skyboxm.jpg?v=1747916281277" />
         
         
+        <img id="poster" crossorigin="anonymous"
+             src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/poster.glb?v=1747929692806"/>
+        
         
         <img id="albedoTex" crossorigin="anonymous"
           src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Albedo_8Km.jpg?v=1747913373940" />
@@ -98,6 +101,10 @@
         material="shader: standard; src: #albedoTex; normalMap: #normalTex; roughnessMap: #roughTex; metalness: 0; repeat: 1 1;"
         shadow="cast: true; receive: true"></a-cylinder>
 
+      <a-plane src=#poster></a-plane>
+      
+      
+      
       <a-plane rotation="-90 0 0" width="30" height="30"
         material="shader: standard; src: #albedoTex; normalMap: #normalTex; roughnessMap: #roughTex; metalness: 0.5; repeat: 4 4;"
         shadow="cast: true; receive: true"></a-plane>
