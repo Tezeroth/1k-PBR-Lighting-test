@@ -5,6 +5,7 @@
     <title>A-Frame PBR Hello World</title>
     <meta name="description" content="A-Frame PBR Example">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <!-- PBR component via aframe-extras or your own shader -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
@@ -13,18 +14,16 @@
         <!-- Skybox -->
         <img id="skybox1" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/ace%20skybox.jpg?v=1747873890750">
         
-        <!-- Floor -->
+        <!-- Floor texture -->
         <img id="checkerboard" crossorigin="anonymous" src="Assets/checkerboardR.png">
 
         <!-- Model -->
         <a-asset-item id="archway" src="Models/archwaybake.glb"></a-asset-item>
 
-        <!-- PBR Textures -->
+        <!-- PBR textures -->
         <img id="albedoTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Albedo_8K.jpg?v=1747873992987" crossorigin="anonymous">
         <img id="normalTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Normal_8K.jpg?v=1747874078663" crossorigin="anonymous">
         <img id="roughTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Roughness_8K.jpg?v=1747874152512" crossorigin="anonymous">
-        <img id="aoTex" src="textures/placeholder_ao.jpg" crossorigin="anonymous">
-        <img id="heightTex" src="textures/placeholder_height.jpg" crossorigin="anonymous">
       </a-assets>
 
       <!-- Sky -->
@@ -49,9 +48,6 @@
                        src: #albedoTex;
                        normalMap: #normalTex;
                        roughnessMap: #roughTex;
-                       aoMap: #aoTex;
-                       displacementMap: #heightTex;
-                       displacementScale: 0.1;
                        metalness: 0;
                        repeat: 1 1;">
       </a-box>
@@ -62,9 +58,6 @@
                           src: #albedoTex;
                           normalMap: #normalTex;
                           roughnessMap: #roughTex;
-                          aoMap: #aoTex;
-                          displacementMap: #heightTex;
-                          displacementScale: 0.1;
                           metalness: 0;
                           repeat: 1 1;">
       </a-sphere>
@@ -75,9 +68,6 @@
                             src: #albedoTex;
                             normalMap: #normalTex;
                             roughnessMap: #roughTex;
-                            aoMap: #aoTex;
-                            displacementMap: #heightTex;
-                            displacementScale: 0.1;
                             metalness: 0;
                             repeat: 1 1;">
       </a-cylinder>
@@ -88,9 +78,6 @@
                          src: #albedoTex;
                          normalMap: #normalTex;
                          roughnessMap: #roughTex;
-                         aoMap: #aoTex;
-                         displacementMap: #heightTex;
-                         displacementScale: 0.05;
                          metalness: 0;
                          repeat: 4 4;">
       </a-plane>
