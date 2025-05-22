@@ -46,22 +46,22 @@
       <!-- Orbiting emissive orb with point light casting shadows -->
       <a-entity id="orb-container"
                 position="0 2 0"
-                animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear; castShadow: true;">
         <a-sphere position="1 0 0"
                   radius="0.2"
                   color="#aeefff"
-                  material="emissive: #aeefff; emissiveIntensity: 1; color: #aeefff; roughness: 0.1; metalness: 0.3;"
+                  material="emissive: #aeefff; emissiveIntensity: 4; color: #aeefff; roughness: 0.1; metalness: 0.3;"
                   shadow="cast: true">
           <a-light type="point"
                    color="#aeefff"
-                   intensity="4"
+                   intensity="8"
                    distance="10"
                    decay="2"
                    castShadow="true"
-                   shadow-camera-near="0.1"
-                   shadow-camera-far="25"
-                   shadow-map-width="1024"
-                   shadow-map-height="1024"
+                   shadow-camera-near="0.5"
+                   shadow-camera-far="50"
+                   shadow-map-width="4096"
+                   shadow-map-height="4096"
                    shadow-bias="-0.001">
           </a-light>
         </a-sphere>
@@ -113,7 +113,7 @@
                          roughnessMap: #roughTex;
                          metalness: 0;
                          repeat: 4 4;"
-               shadow="receive: true">
+              shadow="cast: true; receive: true">
       </a-plane>
 
 
