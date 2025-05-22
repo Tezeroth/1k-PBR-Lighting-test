@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>A-Frame PBR Hello World</title>
+    <title>A-Frame PBR 8k texture test</title>
     <meta name="description" content="A-Frame PBR Example">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
     <!-- PBR component via aframe-extras or your own shader -->
@@ -35,7 +35,29 @@
 
       <!-- Lighting -->
       <a-entity light="type: directional; intensity: 1" position="1 2 1"></a-entity>
-      <a-entity light="type: ambient; intensity: 0.4"></a-entity>
+      <a-entity light="type: ambient; intensity: 1"></a-entity>
+      
+        <!-- Orbiting entity container -->
+      <a-entity id="orb-container"
+                position="0 2 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
+
+        <!-- Light orb -->
+        <a-sphere position="1 0 0"
+                  radius="0.2"
+                  color="#aeefff"
+                  material="emissive: #aeefff; emissiveIntensity: 1; color: #aeefff; roughness: 0.1; metalness: 0.3;">
+          
+          <!-- Attached light -->
+          <a-light type="point"
+                   color="#aeefff"
+                   intensity="80.5"
+                   distance="6"
+                   decay="2">
+          </a-light>
+        </a-sphere>
+      </a-entity>
+    
 
       <!-- Camera -->
       <a-entity position="0 1.6 4">
@@ -43,7 +65,7 @@
       </a-entity>
 
       <!-- Box -->
-      <a-box position="-1 1 -3" width="1" height="1" depth="1"
+      <a-box position="-2 1 -3" width="1" height="1" depth="1"
              material="shader: standard;
                        src: #albedoTex;
                        normalMap: #normalTex;
@@ -63,7 +85,7 @@
       </a-sphere>
 
       <!-- Cylinder -->
-      <a-cylinder position="1.5 0.75 -3" radius="0.5" height="1.5"
+      <a-cylinder position="2 0.75 -3" radius="0.5" height="1.5"
                   material="shader: standard;
                             src: #albedoTex;
                             normalMap: #normalTex;
@@ -73,7 +95,7 @@
       </a-cylinder>
 
       <!-- Ground -->
-      <a-plane rotation="-90 0 0" width="10" height="10"
+      <a-plane rotation="-90 0 0" width="30" height="30"
                material="shader: standard;
                          src: #albedoTex;
                          normalMap: #normalTex;
