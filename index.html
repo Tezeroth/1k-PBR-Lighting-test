@@ -5,32 +5,35 @@
     <title>A-Frame PBR Hello World</title>
     <meta name="description" content="A-Frame PBR Example">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-    <!-- PBR component via aframe-extras or your own shader -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
     <a-scene>
-           <a-assets>
-        <!-- Skybox images, all optimized with https://squoosh.app (hence the R) -->
-            <img id="skybox1" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/ace%20skybox.jpg?v=1747873890750">
-          
-        <!-- Floor images -->
-            <img id="checkerboard" crossorigin="anonymous" src="Assets/checkerboardR.png">
-        <!-- Models -->
-            <a-asset-item id="archway" src="Models/archwaybake.glb"></a-asset-item>
-        </a-assets>
-      
-              <!-- Skybox -->
-        <a-sky
-            src="#skybox1"
-            geometry="primitive: sphere; radius: 492.72; segmentsWidth: 12; segmentsHeight: 12"
-            scale="0.7 0.4 1">
-        </a-sky>
-      
-      
-      
-      
-      
+      <a-assets>
+        <!-- Skybox -->
+        <img id="skybox1" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/ace%20skybox.jpg?v=1747873890750">
+        
+        <!-- Floor -->
+        <img id="checkerboard" crossorigin="anonymous" src="Assets/checkerboardR.png">
+
+        <!-- Model -->
+        <a-asset-item id="archway" src="Models/archwaybake.glb"></a-asset-item>
+
+        <!-- PBR Textures -->
+        <img id="albedoTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Albedo_8K.jpg?v=1747873992987" crossorigin="anonymous">
+        <img id="normalTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Normal_8K.jpg?v=1747874078663" crossorigin="anonymous">
+        <img id="roughTex" src="https://cdn.glitch.me/85d36ce4-fd66-4591-adc8-ae9eb40728ba/Roughness_8K.jpg?v=1747874152512" crossorigin="anonymous">
+        <img id="aoTex" src="textures/placeholder_ao.jpg" crossorigin="anonymous">
+        <img id="heightTex" src="textures/placeholder_height.jpg" crossorigin="anonymous">
+      </a-assets>
+
+      <!-- Sky -->
+      <a-sky
+        src="#skybox1"
+        geometry="primitive: sphere; radius: 492.72; segmentsWidth: 12; segmentsHeight: 12"
+        scale="0.7 0.4 1">
+      </a-sky>
+
       <!-- Lighting -->
       <a-entity light="type: directional; intensity: 1" position="1 2 1"></a-entity>
       <a-entity light="type: ambient; intensity: 0.4"></a-entity>
@@ -46,7 +49,10 @@
                        src: #albedoTex;
                        normalMap: #normalTex;
                        roughnessMap: #roughTex;
-                       metalnessMap: #metalTex;
+                       aoMap: #aoTex;
+                       displacementMap: #heightTex;
+                       displacementScale: 0.1;
+                       metalness: 0;
                        repeat: 1 1;">
       </a-box>
 
@@ -56,7 +62,10 @@
                           src: #albedoTex;
                           normalMap: #normalTex;
                           roughnessMap: #roughTex;
-                          metalnessMap: #metalTex;
+                          aoMap: #aoTex;
+                          displacementMap: #heightTex;
+                          displacementScale: 0.1;
+                          metalness: 0;
                           repeat: 1 1;">
       </a-sphere>
 
@@ -66,7 +75,10 @@
                             src: #albedoTex;
                             normalMap: #normalTex;
                             roughnessMap: #roughTex;
-                            metalnessMap: #metalTex;
+                            aoMap: #aoTex;
+                            displacementMap: #heightTex;
+                            displacementScale: 0.1;
+                            metalness: 0;
                             repeat: 1 1;">
       </a-cylinder>
 
@@ -76,18 +88,12 @@
                          src: #albedoTex;
                          normalMap: #normalTex;
                          roughnessMap: #roughTex;
-                         metalnessMap: #metalTex;
+                         aoMap: #aoTex;
+                         displacementMap: #heightTex;
+                         displacementScale: 0.05;
+                         metalness: 0;
                          repeat: 4 4;">
       </a-plane>
-
-      <!-- ⬇️ Your texture assets go here -->
-      <a-assets>
-        <!-- 👇 Replace these with your texture paths -->
-        <img id="albedoTex" src="textures/myTexture_albedo.jpg" crossorigin="anonymous">
-        <img id="normalTex" src="textures/myTexture_normal.jpg" crossorigin="anonymous">
-        <img id="roughTex" src="textures/myTexture_roughness.jpg" crossorigin="anonymous">
-        <img id="metalTex" src="textures/myTexture_metalness.jpg" crossorigin="anonymous">
-      </a-assets>
     </a-scene>
   </body>
 </html>
