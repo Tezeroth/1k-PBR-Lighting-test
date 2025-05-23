@@ -15,6 +15,7 @@
   </head>
   <body>
     <a-scene
+             stats
       shadow="type: pcsoft"
       renderer="colorManagement: true; physicallyCorrectLights: true; shadowMapEnabled: true;"
       background="color: #000"
@@ -42,11 +43,19 @@
         position="10 3 -0.9"></a-entity>
 
       <a-entity id="orb-container" position="0 2 2"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear;">
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear;"
+                 segments-width="10"
+  segments-height="10">
 
-        <a-sphere id="orb-emission" position="1 0 0" radius="0.2"
+
+<a-sphere id="orb-emission"
+          position="1 0 0"
+          radius="0.2"
+          segments-width="5"
+          segments-height="5"
           material="emissive: #6a7cc4; emissiveIntensity: 4; color: #6a7cc4; roughness: 0.1; metalness: 0.3;"
           shadow="cast: true">
+
 
           <a-light id="orb-pointlight" type="point" color="#6a7cc4" intensity="15" distance="10" decay="2" castShadow="true"
             shadow-camera-near="0.5" shadow-camera-far="50" shadow-map-width="2048" shadow-map-height="2048"
@@ -78,7 +87,9 @@
 
       <a-sphere id="sphere" position="0 0.5 -3" radius="0.75"
         material="shader: standard; src: #albedoTex; normalMap: #normalTex; roughnessMap: #roughTex; metalness: 0; repeat: 3 3;"
-        shadow="cast: true; receive: true"></a-sphere>
+        shadow="cast: true; receive: true"
+                segments-width="10"
+  segments-height="10"></a-sphere>
 
       <a-cylinder position="2 0.75 -4.5" radius="0.5" height="1.5"
         material="shader: standard; src: #albedoTex; normalMap: #normalTex; roughnessMap: #roughTex; metalness: 0; repeat: 3 3;"
