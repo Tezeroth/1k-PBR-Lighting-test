@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>A-Frame PBR 8k texture test</title>
@@ -21,10 +21,10 @@
 
 
       <a-assets>
-        <img id="skybox1" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/ace%20skyboxm.jpg?v=1747916281277" />
-        <img id="albedoTex" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/concretealbedo1ks.jpg?v=1748022025722" />
-        <img id="normalTex" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/concretenormal1ks.jpg?v=1748021855819" />
-        <img id="roughTex" crossorigin="anonymous" src="https://cdn.glitch.global/85d36ce4-fd66-4591-adc8-ae9eb40728ba/concreteroughness1k.jpg?v=1748021860099" />
+        <img id="skybox1" crossorigin="anonymous" src="Assets/skybox.jpg" alt="Skybox texture" />
+        <img id="albedoTex" crossorigin="anonymous" src="Assets/concretealbedo1ks.jpg" alt="Concrete albedo texture" />
+        <img id="normalTex" crossorigin="anonymous" src="Assets/concretenormal1ks.jpg" alt="Concrete normal map texture" />
+        <img id="roughTex" crossorigin="anonymous" src="Assets/concreteroughness1k.jpg" alt="Concrete roughness map texture" />
       </a-assets>
 
       <!-- Skybox -->
@@ -83,10 +83,26 @@
       </a-entity>
 
       <!-- Player rig -->
-      <a-entity id="rig" movement-controls position="0 0 0">
-        <a-entity id="camera" camera position="0 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls></a-entity>
-        <a-entity id="leftHand" tracked-controls="hand: left" gamepad-controls="hand: left"></a-entity>
-        <a-entity id="rightHand" tracked-controls="hand: right" gamepad-controls="hand: right"></a-entity>
+      <a-entity id="rig" 
+                movement-controls="fly: false; constrainToNavMesh: false; speed: 0.3" 
+                position="0 0 0">
+        <a-entity id="camera" 
+                  camera 
+                  position="0 1.6 0" 
+                  look-controls="pointerLockEnabled: true; touchEnabled: true; magicWindowTrackingEnabled: true" 
+                  wasd-controls="acceleration: 65"
+                  mobile-look-controls
+                  touch-look-controls></a-entity>
+        <a-entity id="leftHand" 
+                  tracked-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc" 
+                  vive-controls="hand: left" 
+                  oculus-touch-controls="hand: left"
+                  windows-motion-controls="hand: left"></a-entity>
+        <a-entity id="rightHand" 
+                  tracked-controls="hand: right; handModelStyle: lowPoly; color: #ccffcc" 
+                  vive-controls="hand: right" 
+                  oculus-touch-controls="hand: right"
+                  windows-motion-controls="hand: right"></a-entity>
       </a-entity>
 
       <!-- Geometry -->
