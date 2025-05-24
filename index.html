@@ -10,8 +10,8 @@
   <body>
 <a-scene
          
-  renderer="colorManagement: true; physicallyCorrectLights: true; shadowMapEnabled: true;"
-
+  renderer="colorManagement: true; antialias: true;"
+ stats
  
   background="color: #000"
   highRefreshRate="true"
@@ -24,11 +24,20 @@
         <img id="skybox1" crossorigin="anonymous" src="Assets/skybox.jpg" alt="Skybox texture" />
         <img id="albedoTex" crossorigin="anonymous" src="Assets/concretealbedo1ks.jpg" alt="Concrete albedo texture" />
         <img id="normalTex" crossorigin="anonymous" src="Assets/concretenormal1ks.jpg" alt="Concrete normal map texture" />
-        <img id="roughTex" crossorigin="anonymous" src="Assets/concreteroughness1k.jpg" alt="Concrete roughness map texture" />
+        <img id="roughTex" crossorigin="anonymous" src="Assets/concreteroughness1ks.jpg" alt="Concrete roughness map texture" />
+        <!-- <audio id="windSound" crossorigin="anonymous" src="Assets/gentle-wind.mp3" preload="auto"></audio> -->
+        <!-- <audio id="humSound" crossorigin="anonymous" src="Assets/fluorescent-hum.mp3" preload="auto"></audio> -->
       </a-assets>
 
       <!-- Skybox -->
       <a-sky src="#skybox1" geometry="primitive: sphere; radius: 492.72; segmentsWidth: 12; segmentsHeight: 12" scale="0.7 0.4 1"></a-sky>
+
+      <!-- Ambient wind sound -->
+      <!-- <a-entity 
+        id="ambient-wind"
+        sound="src: #windSound; autoplay: true; loop: true; volume: 0.3"
+        position="0 0 0">
+      </a-entity> -->
 
       <!-- Sun Light -->
       <a-entity
@@ -47,20 +56,18 @@
           id="orb-emission"
           position="1 0 0"
           radius="0.2"
-          segments-width="12"
-          segments-height="12"
-          material="emissive: #00aaff; emissiveIntensity: 4; color: #00aaff; roughness: 0.1; metalness: 0.3;"
+          segments-width="32"
+          segments-height="32"
+          material="emissive: #00aaff; emissiveIntensity: 6; color: #00aaff; roughness: 0.0; metalness: 1.0;"
           shadow="cast: true"
         >
           <!-- Point Light inside orb -->
           <a-light
             id="orb-pointlight"
             type="point"
-            color="#6a7cc4"
+            color="#00aaff"
             intensity="15"
             distance="10"
-            decay="2"
-     
             shadow-camera-near="0.5"
             shadow-camera-far="50"
             shadow-map-width="2048"
@@ -71,7 +78,7 @@
           <!-- Directional Light inside orb -->
           <a-entity
             id="orb-directionallight"
-            light="type: directional; color: #6a7cc4; intensity: 0.5; castShadow: true;"
+            light="type: directional; color: #00aaff; intensity: 0.8; castShadow: true;"
             position="0 0 0"
             shadow-camera-near="0.5"
             shadow-camera-far="50"
@@ -94,12 +101,12 @@
                   mobile-look-controls
                   touch-look-controls></a-entity>
         <a-entity id="leftHand" 
-                  tracked-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc" 
+                  tracked-controls="hand: left" 
                   vive-controls="hand: left" 
                   oculus-touch-controls="hand: left"
                   windows-motion-controls="hand: left"></a-entity>
         <a-entity id="rightHand" 
-                  tracked-controls="hand: right; handModelStyle: lowPoly; color: #ccffcc" 
+                  tracked-controls="hand: right" 
                   vive-controls="hand: right" 
                   oculus-touch-controls="hand: right"
                   windows-motion-controls="hand: right"></a-entity>
@@ -119,20 +126,20 @@
         id="sphere"
         position="0 0.5 -3"
         radius="0.75"
+        segments-width="32"
+        segments-height="32"
         material="shader: standard; src: #albedoTex; normalMap: #normalTex; roughnessMap: #roughTex; metalness: 0; repeat: 3 3;"
         shadow="cast: true; receive: true"
-        segments-width="12"
-        segments-height="12"
       ></a-sphere>
 
       <a-cylinder
         position="2 0.75 -4.5"
         radius="0.5"
         height="1.5"
+        segments-radial="32"
+        segments-height="8"
         material="shader: standard; src: #albedoTex; normalMap: #normalTex; roughnessMap: #roughTex; metalness: 0; repeat: 3 3;"
         shadow="cast: true; receive: true"
-        segments-width="5"
-        segments-height="2"
       ></a-cylinder>
 
       <a-plane
@@ -151,6 +158,7 @@
         height="50"
         position="0 -0.005 0"
         material="shader: flat; color: #ffcc99; transparent: true; opacity: 0.18;"
+        animation="property: rotation; to: -90 360 0; loop: true; dur: 45000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -160,6 +168,7 @@
         height="45"
         position="5 -0.01 3"
         material="shader: flat; color: #ffdd99; transparent: true; opacity: 0.15;"
+        animation="property: rotation; to: -90 375 15; loop: true; dur: 52000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -169,6 +178,7 @@
         height="80"
         position="-8 -0.015 -5"
         material="shader: flat; color: #ffcc88; transparent: true; opacity: 0.12;"
+        animation="property: rotation; to: -90 340 -20; loop: true; dur: 38000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -178,6 +188,7 @@
         height="70"
         position="10 -0.02 -8"
         material="shader: flat; color: #ffdd88; transparent: true; opacity: 0.1;"
+        animation="property: rotation; to: -90 370 10; loop: true; dur: 48000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -187,6 +198,7 @@
         height="95"
         position="-15 -0.025 10"
         material="shader: flat; color: #ffee99; transparent: true; opacity: 0.08;"
+        animation="property: rotation; to: -90 330 -30; loop: true; dur: 41000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -196,6 +208,7 @@
         height="120"
         position="20 -0.03 15"
         material="shader: flat; color: #ffee88; transparent: true; opacity: 0.06;"
+        animation="property: rotation; to: -90 385 25; loop: true; dur: 55000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -205,6 +218,7 @@
         height="160"
         position="-25 -0.035 -20"
         material="shader: flat; color: #fff099; transparent: true; opacity: 0.05;"
+        animation="property: rotation; to: -90 345 -15; loop: true; dur: 43000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -214,6 +228,7 @@
         height="180"
         position="30 -0.04 25"
         material="shader: flat; color: #fff199; transparent: true; opacity: 0.04;"
+        animation="property: rotation; to: -90 395 35; loop: true; dur: 58000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -223,6 +238,7 @@
         height="220"
         position="-35 -0.045 -30"
         material="shader: flat; color: #fff299; transparent: true; opacity: 0.03;"
+        animation="property: rotation; to: -90 320 -40; loop: true; dur: 35000; easing: linear;"
       ></a-plane>
       
       <a-plane
@@ -232,7 +248,23 @@
         height="280"
         position="40 -0.05 35"
         material="shader: flat; color: #fff399; transparent: true; opacity: 0.025;"
+        animation="property: rotation; to: -90 380 20; loop: true; dur: 50000; easing: linear;"
       ></a-plane>
+
+      <!-- Extra colored lights for dramatic shadows -->
+      <a-entity
+        id="accent-light-1"
+        light="color: #ff4400; intensity: 1.5; type: point; distance: 8"
+        position="-5 4 -3"
+        animation="property: position; to: -5 6 -3; dir: alternate; loop: true; dur: 4000; easing: easeInOutSine"
+      ></a-entity>
+      
+      <a-entity
+        id="accent-light-2"
+        light="color: #ff0088; intensity: 1.2; type: point; distance: 6"
+        position="4 3 -6"
+        animation="property: position; to: 4 5 -6; dir: alternate; loop: true; dur: 6000; easing: easeInOutSine"
+      ></a-entity>
     </a-scene>
   </body>
 </html>
